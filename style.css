@@ -1,0 +1,23 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: rgb(49, 49, 49);
+    color: #fff;
+}
+img{
+    width: 25%;
+    height: 25%;
+}
+#new-course{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1.5rem;
+}
+#new-course .form-group{
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5rem;
+}
