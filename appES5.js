@@ -35,6 +35,8 @@ UI.prototype.deleteCourse = function (element) {
   if (element.classList.contains("deleteBtn")) {
     element.parentElement.parentElement.remove();
   }
+  ui.showAlert("the course has been deleted", "danger");
+
 };
 
 UI.prototype.showAlert = function (message, className) {
@@ -80,5 +82,4 @@ form.addEventListener("submit", function (e) {
 list.addEventListener("click", function (e) {
   const ui = new UI();
   ui.deleteCourse(e.target);
-  ui.showAlert("the course has been deleted", "danger");
 });
