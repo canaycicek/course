@@ -36,7 +36,6 @@ UI.prototype.deleteCourse = function (element) {
     element.parentElement.parentElement.remove();
   }
   ui.showAlert("the course has been deleted", "danger");
-
 };
 
 UI.prototype.showAlert = function (message, className) {
