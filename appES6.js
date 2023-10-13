@@ -5,6 +5,7 @@ const list = document.getElementById("course-list");
 // Course class
 class Course {
   constructor(title, instructor, image) {
+    this.courseId = Math.floor(Math.random() * 10000);
     this.title = title;
     this.instructor = instructor;
     this.image = image;
@@ -19,13 +20,12 @@ class UI {
             <td><img src="${course.image}"/></td>
             <td>${course.title}</td>
             <td>${course.instructor}</td>
-            <td><a href="#" class="deleteBtn btn btn-danger btn-sm">Delete</a></td>
+            <td><a href="#" data-id="${course.courseId}" class="deleteBtn btn btn-danger btn-sm">Delete</a></td>
         </tr>
     `;
 
     list.innerHTML += html;
   }
-
   clearControls() {
     const title = (document.getElementById("title").value = "");
     const instructor = (document.getElementById("instructor").value = "");
@@ -81,7 +81,21 @@ class Storage {
     localStorage.setItem("courses", JSON.stringify(courses));
   }
 
-  static deleteCourse(course) {}
+  static deleteCourse(element) {
+    if (element.classList.contains("deleteBtn")) {
+      const id = element.getAttribute("data-id");
+
+      const courses = Storage.getCourses();
+
+      courses.forEach((course, index) => {
+        if (course.courseId == id) {
+          courses.splice(index, 1);
+        }
+      });
+
+      localStorage.setItem("courses", JSON.stringify(courses));
+    }
+  }
 }
 
 document.addEventListener("DOMContentLoaded", Storage.displayCourses);
@@ -122,5 +136,5 @@ list.addEventListener("click", function (e) {
   ui.deleteCourse(e.target);
 
   // delete from LS
-  Storage.deleteCourse();
+  Storage.deleteCourse(e.target);
 });
